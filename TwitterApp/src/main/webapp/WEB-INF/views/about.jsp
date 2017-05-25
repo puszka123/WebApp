@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <html>
 <head>
-	<title>Home</title>
+	<title>Twit</title>
 	<link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
