@@ -1,13 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <html>
 <head>
 	<title>Home</title>
 	<link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<!-- Static navbar -->
+ <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -31,41 +30,21 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
+      
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>About</h1>
+        <p>
+          Get tweets you like
+        </p>
+         <p>
+          I have no idea
+        </p>
+      </div>
 
 
- <form name="Enter user name" action="saveR" method="POST" >
-    <ul>
-        <li><label>User:</label> <input type='text' name='username' /></li>
-        <li><label>Number of tweets:</label> <input type='text' name='count' /></li>
-        <li><label>&nbsp;</label> <input type="submit" value="OK" class="btn"></li>
-    </ul>
-</form>
-
-
- <h1>Recent tweets!</h1>  
- <table class="table">
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>User</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-   <c:forEach var="tweet" items="${tweets}">   
-   <tr>  
-   <td>${tweet.text}</td>  
-   <td>${tweet.author}</td>  
-   <td>${tweet.date}</td>  
-   </tr>  
-   </c:forEach> 
-  </tbody>
-</table>
-
-  <p>
-         <a class="btn btn-lg btn-primary" href="/twit" role="button">Back &raquo;</a>
-    </p> 
-   <script src="webjars/jquery/2.1.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
+<script src="webjars/jquery/2.1.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>   
 </body>
 </html>
+

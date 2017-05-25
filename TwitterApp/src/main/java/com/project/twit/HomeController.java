@@ -1,7 +1,6 @@
 package com.project.twit;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -10,20 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;  
 import com.project.model.*;
 
-
-import com.project.twit.*;
-import twitter4j.Query;
-import twitter4j.QueryResult;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 /**
  * Handles requests for the application home page.
@@ -42,7 +32,6 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -52,6 +41,24 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	public String contact(Locale locale, Model model) {
+		return "contact";
+	}
+	
+	@RequestMapping(value="/saveP",method = RequestMethod.POST) 
+	 public String saveP(@RequestParam("username") String username, @RequestParam("count") String count){  
+			//writing to class fields is a bit stupid but i have no idea how to do it better :D
+			name = username;
+			this.count = Integer.valueOf(count);
+	        return "redirect:/popular";
+	    }  
+	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about(Locale locale, Model model) {
+		return "about";
 	}
 	
 	@RequestMapping(value="/saveP",method = RequestMethod.POST) 

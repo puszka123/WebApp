@@ -34,7 +34,7 @@ public class TweetsResource {
 		}
 		int i = 0;
 	    for (Status status : result.getTweets()){
-	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getUser().getCreatedAt(), status.getText());
+	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getCreatedAt(), status.getText());
 	    	tweets.add(tweet);
 	    	i++;
 	    }
@@ -58,7 +58,7 @@ public class TweetsResource {
 		}
 		int i = 0;
 	    for (Status status : result.getTweets()){
-	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getUser().getCreatedAt(), status.getText());
+	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getCreatedAt(), status.getText());
 	    	tweets.add(tweet);
 	    	i++;
 	    }
@@ -83,7 +83,7 @@ public class TweetsResource {
 		}
 		int i = 0;
 	    for (Status status : result.getTweets()){
-	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getUser().getCreatedAt(), status.getText());
+	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getCreatedAt(), status.getText());
 	    	tweets.add(tweet);
 	    	i++;
 	    }
@@ -136,7 +136,7 @@ public class TweetsResource {
 		}
 		int i = 0;
 	    for (Status status : result.getTweets()){
-	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getUser().getCreatedAt(), status.getText());
+	    	Tweet tweet = new Tweet(Integer.toString(i), status.getUser().getScreenName(), status.getCreatedAt(), status.getText());
 	    	tweets.add(tweet);
 	    	i++;
 	    }
