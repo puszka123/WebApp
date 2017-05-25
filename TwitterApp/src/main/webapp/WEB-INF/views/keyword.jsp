@@ -39,7 +39,7 @@
         <li><label>User:</label> <input type='text' name='username' /></li>
         <li><label>Keyword:</label> <input type='text' name='keyword' /></li>
         <li><label>Number of tweets:</label> <input type='text' name='count' /></li>
-        <li><label>&nbsp;</label> <input type="submit" value="OK" class="btn"></li>
+        <li><label>&nbsp;</label> <input type="submit" value="APPLY" class="btn btn-lg btn-primary"></li>
     </ul>
 </form>
 
@@ -65,7 +65,7 @@
 </table>
    
     <p>
-         <a class="btn btn-lg btn-primary" href="/twit" role="button">Back &raquo;</a>
+         <a class="btn btn-lg btn-primary" href="javascript: history.go(-1)" role="button">Back &raquo;</a>
     </p>  
    <script src="webjars/jquery/2.1.1/jquery.min.js"></script>
 	<script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script> 

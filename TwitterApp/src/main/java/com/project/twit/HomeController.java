@@ -9,10 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.model.*;
+
 
 
 /**
@@ -21,7 +23,6 @@ import com.project.model.*;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	private String name;
 	private int count;
 	private String since;
@@ -30,16 +31,15 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	private void resetParams()
+	{
+		name = since = until = keyword = null;
+		count = 0;
+	}
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
 		return "home";
 	}
 	
@@ -48,13 +48,6 @@ public class HomeController {
 		return "contact";
 	}
 	
-	@RequestMapping(value="/saveP",method = RequestMethod.POST) 
-	 public String saveP(@RequestParam("username") String username, @RequestParam("count") String count){  
-			//writing to class fields is a bit stupid but i have no idea how to do it better :D
-			name = username;
-			this.count = Integer.valueOf(count);
-	        return "redirect:/popular";
-	    }  
 	
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
 	public String about(Locale locale, Model model) {
@@ -103,6 +96,7 @@ public class HomeController {
 		public String popular(Model model) {
 		 	List<Tweet> tweets = TweetsResource.gerPopularUserTweets(name, count);
 			model.addAttribute("tweets", tweets );
+			resetParams();
 			return "popular";
 		}
 	 	
@@ -110,6 +104,7 @@ public class HomeController {
 		public String recent(Model model) {
 		 	List<Tweet> tweets = TweetsResource.getUserTweetsInInterval(name, count);
 			model.addAttribute("tweets", tweets );
+			resetParams();
 			return "recent";
 		}
 	 	
@@ -117,6 +112,7 @@ public class HomeController {
 		public String interval(Model model) {
 	 		List<Tweet> tweets = TweetsResource.getUserTweetsInInterval(name, since, until, count);
 			model.addAttribute("tweets", tweets );
+			resetParams();
 			return "interval";
 		}
 	 	
@@ -124,6 +120,7 @@ public class HomeController {
 		public String keyword(Model model) {
 	 		List<Tweet> tweets = TweetsResource.getUserTweetsByKeyword(name, count, keyword);
 			model.addAttribute("tweets", tweets );
+			resetParams();
 			return "keyword";
 		}
 	
