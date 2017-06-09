@@ -1,15 +1,14 @@
 package com.project.twit;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,70 +54,84 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/saveP",method = RequestMethod.POST) 
-	 public String saveP(@RequestParam("username") String username, @RequestParam("count") String count){  
-			//writing to class fields is a bit stupid but i have no idea how to do it better :D
-			name = username;
-			this.count = Integer.valueOf(count);
+	 public String saveP(@Valid @ModelAttribute("popular")PopularModel inputModel, BindingResult bindingResult){  
+			if(bindingResult.hasErrors())
+			{
+				return "popular";
+			}
+			name = inputModel.getUsername();
+			this.count = inputModel.getCount();
 	        return "redirect:/popular";
 	    }  
 	
 	@RequestMapping(value="/saveR",method = RequestMethod.POST) 
-	 public String saveR(@RequestParam("username") String username, @RequestParam("count") String count){  
-			//writing to class fields is a bit stupid but i have no idea how to do it better :D
-			name = username;
-			this.count = Integer.valueOf(count);
+	 public String saveR(@Valid @ModelAttribute("recent")RecentModel inputModel, BindingResult bindingResult){  
+			if(bindingResult.hasErrors())
+			{
+				return "recent";
+			}
+			name = inputModel.getUsername();
+			this.count = inputModel.getCount();
 	        return "redirect:/recent";
 	    }  
 	
 	@RequestMapping(value="/saveI",method = RequestMethod.POST) 
-	 public String saveI(@RequestParam("username") String username,@RequestParam("since") String since,
-			 @RequestParam("until") String until, @RequestParam("count") String count){  
-			//writing to class fields is a bit stupid but i have no idea how to do it better :D
-			name = username;
-			this.count = Integer.valueOf(count);
-			this.since = since;
-			this.until = until;
+	 public String saveI(@Valid @ModelAttribute("interval")IntervalModel inputModel, BindingResult bindingResult){  
+			if(bindingResult.hasErrors())
+			{
+				return "interval";
+			}
+			name = inputModel.getUsername();
+			this.count = inputModel.getCount();
+			this.since = inputModel.getSince();
+			this.until = inputModel.getUntil();
 	        return "redirect:/interval";
 	    } 
 	
 	@RequestMapping(value="/saveK",method = RequestMethod.POST) 
-	 public String saveK(@RequestParam("username") String username, 
-			 @RequestParam("count") String count, @RequestParam("keyword") String keyword){  
-			//writing to class fields is a bit stupid but i have no idea how to do it better :D
-			name = username;
-			this.count = Integer.valueOf(count);
-			this.keyword = keyword;
+	 public String saveK(@Valid @ModelAttribute("keyword")KeywordModel inputModel, BindingResult bindingResult){  
+			if(bindingResult.hasErrors())
+			{
+				return "keyword";
+			}
+			name = inputModel.getUsername();
+			this.count = inputModel.getCount();
+			this.keyword =inputModel.getKeyword();
 	        return "redirect:/keyword";
 	    } 
 	
 	 
-	 	@RequestMapping(value = "/popular")
+	 	@RequestMapping(value = "/popular", method = RequestMethod.GET)
 		public String popular(Model model) {
 		 	List<Tweet> tweets = TweetsResource.gerPopularUserTweets(name, count);
+		 	model.addAttribute("popular", new PopularModel());
 			model.addAttribute("tweets", tweets );
 			resetParams();
 			return "popular";
 		}
 	 	
-	 	@RequestMapping(value = "/recent")
+	 	@RequestMapping(value = "/recent", method = RequestMethod.GET)
 		public String recent(Model model) {
 		 	List<Tweet> tweets = TweetsResource.getUserTweetsInInterval(name, count);
+		 	model.addAttribute("recent", new RecentModel());
 			model.addAttribute("tweets", tweets );
 			resetParams();
 			return "recent";
 		}
 	 	
-	 	@RequestMapping(value = "/interval")
+	 	@RequestMapping(value = "/interval", method = RequestMethod.GET)
 		public String interval(Model model) {
 	 		List<Tweet> tweets = TweetsResource.getUserTweetsInInterval(name, since, until, count);
+	 		model.addAttribute("interval", new IntervalModel());
 			model.addAttribute("tweets", tweets );
 			resetParams();
 			return "interval";
 		}
 	 	
-	 	@RequestMapping(value = "/keyword")
+	 	@RequestMapping(value = "/keyword" ,method = RequestMethod.GET)
 		public String keyword(Model model) {
 	 		List<Tweet> tweets = TweetsResource.getUserTweetsByKeyword(name, count, keyword);
+	 		model.addAttribute("keyword", new KeywordModel());
 			model.addAttribute("tweets", tweets );
 			resetParams();
 			return "keyword";
