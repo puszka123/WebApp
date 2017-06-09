@@ -16,6 +16,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+       
             <a class="navbar-brand" href="/twit">Twit</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
@@ -30,7 +31,8 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-      
+
+
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Get tweets!</h1>

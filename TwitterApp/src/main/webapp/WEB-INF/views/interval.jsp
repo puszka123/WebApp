@@ -34,15 +34,15 @@
       
      
 
- <form name="Enter user name" action="saveI" method="POST" >
+ <form:form name="Enter user name" action="saveI" method="POST" modelAttribute="interval">
     <ul>
-        <li><label>User:</label> <input type='text' name='username' /></li>
-        <li><label>Since:</label> <input type='text' name='since' /></li>
-        <li><label>Until:</label> <input type='text' name='until' /></li>
-        <li><label>Number of tweets:</label> <input type='text' name='count' /></li>
+        <li><label>User:</label> <form:input path='username' /></li>
+        <li><label>Since:</label> <form:input path='since' /></li>
+        <li><label>Until:</label> <form:input path='until' /></li>
+        <li><label>Number of tweets:</label> <form:input path='count' /></li>
         <li><label>&nbsp;</label> <input type="submit" value="APPLY" class="btn btn-lg btn-primary"></li>
     </ul>
-</form>
+</form:form>
 
 <h1>since-until tweets!</h1>  
 <table class="table">

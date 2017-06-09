@@ -34,14 +34,14 @@
       
      
 
- <form name="Enter user name" action="saveK" method="POST" >
+ <form:form name="Enter user name" action="saveK" method="POST" modelAttribute="keyword">
     <ul>
-        <li><label>User:</label> <input type='text' name='username' /></li>
-        <li><label>Keyword:</label> <input type='text' name='keyword' /></li>
-        <li><label>Number of tweets:</label> <input type='text' name='count' /></li>
+        <li><label>User:</label> <form:input path='username' /></li>
+        <li><label>Keyword:</label> <form:input path='keyword' /></li>
+        <li><label>Number of tweets:</label> <form:input path='count' /></li>
         <li><label>&nbsp;</label> <input type="submit" value="APPLY" class="btn btn-lg btn-primary"></li>
     </ul>
-</form>
+</form:form>
 
 
  <h1>Keyword tweets!</h1>  

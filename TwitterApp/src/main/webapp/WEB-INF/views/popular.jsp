@@ -34,13 +34,13 @@
       
      
 
- <form name="Enter user name" action="saveP" method="POST" >
+ <form:form name="Enter user name" action="saveP" method="POST" modelAttribute="popular">
     <ul>
-        <li><label>User:</label> <input type='text' name='username' /></li>
-        <li><label>Number of tweets:</label> <input type='text' name='count' /></li>
+        <li><label>User:</label> <form:input path='username' /></li>
+        <li><label>Number of tweets:</label> <form:input path='count' /></li>
         <li><label>&nbsp;</label> <input type="submit" value="APPLY" class="btn btn-lg btn-primary"></li>
     </ul>
-</form>
+</form:form>
 
 
  <h1>Popular tweets!</h1>  
