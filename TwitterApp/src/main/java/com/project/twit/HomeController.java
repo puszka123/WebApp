@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.model.*;
 
+import twitter4j.TwitterException;
+
 
 
 /**
@@ -111,7 +113,12 @@ public class HomeController {
 	@RequestMapping(value="/submitPin",method = RequestMethod.POST) 
 	 public String submitPin(@RequestParam("pin") String pin){  
 			this.pin = pin;
-			TwitterConfigDao.authorizeOauth(pin);
+			try {
+				TwitterConfigDao.authorizeOauth(pin);
+			} catch (TwitterException e) {
+				System.out.println("fail");
+				return "redirect:/";
+			}
 	        return "home";
 	    } 
 	

@@ -51,15 +51,30 @@ public class TwitterConfigDao {
 		return requestToken.getAuthorizationURL();
 	}
 	
-	public static void authorizeOauth(String pin) {
+	public static void authorizeOauth(String pin) throws TwitterException {
 		try {
 			accessToken = twitterOauthInstance.getOAuthAccessToken(requestToken, pin);
+			token = accessToken.getToken();
+	        tokenSecret = accessToken.getTokenSecret();
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw e;
+		} finally {
+			ConfigurationBuilder cb2 = new ConfigurationBuilder();
+			cb2.setDebugEnabled(true)
+	        .setOAuthConsumerKey("tQRtvohRMp5swXTZW1LUuxVOM")
+	        .setOAuthConsumerSecret("gZ615Fk9jurrcAUnVuV3F43c0Abp4Bn5OTDAhuqNEunfb7oCVn")
+	        .setOAuthAccessToken(null)
+	        .setOAuthAccessTokenSecret(null);
+			
+			TwitterFactory tf2 = new TwitterFactory(cb2.build());
+		    twitterOauthInstance = tf2.getInstance();
+			try {
+				requestToken = twitterOauthInstance.getOAuthRequestToken();
+			} catch (TwitterException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		token = accessToken.getToken();
-        tokenSecret = accessToken.getTokenSecret();
 		
 		
 	}
