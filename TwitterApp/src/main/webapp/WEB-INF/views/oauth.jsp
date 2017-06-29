@@ -40,10 +40,12 @@
           <a class="btn btn-lg btn-primary" target="_blank" href="${authlink}" role="button">Get your pin &raquo;</a>
         </p>
         
-        <form method="post" action="/submitPin">
-        	<input type="text" name="pin"/>
-        	<input type="submit" />
-        </form>
+      <form name="Enter your pin" action="submitPin" method="POST" >
+	      <ul>
+	          <li><label>Pin:</label> <input type='text' name='pin' /></li>
+	          <li><label>&nbsp;</label> <input type="submit" value="OK" class="btn"></li>
+	      </ul>
+ 	  </form>
       </div>
       
 

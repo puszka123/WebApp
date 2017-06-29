@@ -110,9 +110,10 @@ public class HomeController {
 	
 	@RequestMapping(value="/submitPin",method = RequestMethod.POST) 
 	 public String submitPin(@RequestParam("pin") String pin){  
+			System.out.println(pin);
 			this.pin = pin;
 			TwitterConfigDao.authorizeOauth(pin);
-	        return "redirect:/home";
+	        return "home";
 	    } 
 	
 	 
