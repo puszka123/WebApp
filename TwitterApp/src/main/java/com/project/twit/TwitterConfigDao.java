@@ -26,7 +26,7 @@ public class TwitterConfigDao {
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		twitterInstance = tf.getInstance();
 		
-		/*ConfigurationBuilder cb2 = new ConfigurationBuilder();
+		ConfigurationBuilder cb2 = new ConfigurationBuilder();
 		cb2.setDebugEnabled(true)
         .setOAuthConsumerKey("tQRtvohRMp5swXTZW1LUuxVOM")
         .setOAuthConsumerSecret("gZ615Fk9jurrcAUnVuV3F43c0Abp4Bn5OTDAhuqNEunfb7oCVn")
@@ -41,7 +41,7 @@ public class TwitterConfigDao {
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	public static Twitter getModel() {

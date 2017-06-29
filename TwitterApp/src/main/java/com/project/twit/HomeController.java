@@ -27,6 +27,7 @@ public class HomeController {
 	private String since;
 	private String until;
 	private String keyword;
+	private String pin;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -38,6 +39,12 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String oauth(Locale locale, Model model) {
+		model.addAttribute("authlink", TwitterConfigDao.getOauthLink());
+		return "oauth";
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		return "home";
 	}
@@ -94,10 +101,18 @@ public class HomeController {
 			{
 				return "keyword";
 			}
+			
 			name = inputModel.getUsername();
 			this.count = inputModel.getCount();
 			this.keyword =inputModel.getKeyword();
 	        return "redirect:/keyword";
+	    } 
+	
+	@RequestMapping(value="/submitPin",method = RequestMethod.POST) 
+	 public String submitPin(@RequestParam("pin") String pin){  
+			this.pin = pin;
+			TwitterConfigDao.authorizeOauth(pin);
+	        return "redirect:/home";
 	    } 
 	
 	 
@@ -136,5 +151,8 @@ public class HomeController {
 			resetParams();
 			return "keyword";
 		}
+	 	
+
+		
 	
 }
