@@ -34,8 +34,7 @@ public class TwitterConfigDao {
         .setOAuthAccessTokenSecret(null);
 		
 		TwitterFactory tf2 = new TwitterFactory(cb2.build());
-	    Twitter twitterOauthInstance = tf2.getInstance();
-		
+	    twitterOauthInstance = tf2.getInstance();
 		try {
 			requestToken = twitterOauthInstance.getOAuthRequestToken();
 		} catch (TwitterException e) {
