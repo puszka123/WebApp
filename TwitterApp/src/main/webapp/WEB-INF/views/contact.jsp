@@ -16,11 +16,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/twit">Twit</a>
+            <a class="navbar-brand" href="/twit/home">Twit</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/twit">Home</a></li>
+              <li><a href="/twit/home">Home</a></li>
               <li><a href="about">About</a></li>
               <li class="active"><a href="contact">Contact</a></li>
             </ul>
