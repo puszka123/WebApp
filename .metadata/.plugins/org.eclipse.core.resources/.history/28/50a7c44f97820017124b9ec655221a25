@@ -1,0 +1,63 @@
+package com.project.twit;
+
+import java.util.List;
+import java.util.Locale;
+
+import javax.validation.Valid;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.project.model.*;
+
+import twitter4j.TwitterException;
+
+
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class IntervalController {
+	
+	private String name;
+	private int count;
+	private String since;
+	private String until;
+	private String keyword;
+	private String pin;
+
+	private void resetParams()
+	{
+		name = since = until = keyword = null;
+		count = 0;
+	}
+	
+	@RequestMapping(value="/saveI",method = RequestMethod.POST) 
+	public String saveI(@Valid @ModelAttribute("interval")IntervalModel inputModel, BindingResult bindingResult)
+	{  
+		if(bindingResult.hasErrors())
+		{
+			return "interval";
+		}
+		name = inputModel.getUsername();
+		this.count = inputModel.getCount();
+		this.since = inputModel.getSince();
+		this.until = inputModel.getUntil();
+	    return "redirect:/interval";
+	} 
+	
+	@RequestMapping(value = "/interval", method = RequestMethod.GET)
+	public String interval(Model model) 
+	 {
+	 	List<Tweet> tweets = TweetsResource.getUserTweetsInInterval(name, since, until, count);
+	 	model.addAttribute("interval", new IntervalModel());
+		model.addAttribute("tweets", tweets );
+		resetParams();
+		return "interval";
+	}
+}
